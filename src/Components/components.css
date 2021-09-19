@@ -9,9 +9,12 @@
     border-radius: 20px 50px 20px 50px;
     border:5px solid rgb(88, 88, 88);
 }
-
+.headertext{
+    text-align: center;
+}
 .headerlink,.headerlink:hover{
     background-color: rgb(16, 248, 140);
     border-radius: 1000px;
+    padding: 10px;
 }
 
