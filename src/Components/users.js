@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import { useState } from "react";
  export let userdata = [
     {
      "createdAt": "2021-09-19T08:43:01.845Z",
@@ -55,11 +56,23 @@ import {Link} from "react-router-dom";
 
 function Users()
 {
+    const [users,setUsers] = useState(userdata);
+
+    let deleteid;
+    let getdeleteid=(id)=>{
+         deleteid = id;
+    }
+
+   let deleteuser=()=>{
+         let tempusers = users.filter((x)=>x.id !== deleteid );
+        setUsers(tempusers);
+   } 
+
     return(
         <>
         <div className="container">
            {
-               userdata.map((user)=>{
+               users.map((user)=>{
                    return    <div className="card mx-auto my-5" key={user.id} style={{width:"80%"}}>
                     <div className="card-body">
                         <div className="row">
@@ -79,7 +92,7 @@ function Users()
                         <div className="mt-2 row" >
                             <Link to={`edituser/${user.id}`} className="btn col-md-3 mt-2 col-lg-2 btn-outline-primary mx-2">Edit User</Link>
                             <Link to={`profile/${user.id}`} className="btn  col-lg-2 mt-2 col-md-3 btn-dark  mx-2">Profile</Link>
-                            <button className="btn btn-danger  col-lg-2 col-md-3 mt-2 mx-2" data-toggle="modal" data-target="#mymodal" >Delete</button>
+                            <button className="btn btn-danger  col-lg-2 col-md-3 mt-2 mx-2" data-toggle="modal" data-target="#mymodal" onClick={()=>getdeleteid(user.id)} >Delete</button>
                         </div>   
                     </div>
                    </div> 
@@ -93,7 +106,7 @@ function Users()
                    Are you sure, You want to delete User?
                </div>
                <div className="modal-footer">
-                   <button className="btn btn-danger" data-dismiss="modal" >Delete</button>
+                   <button className="btn btn-danger" data-dismiss="modal" onClick={deleteuser} >Delete</button>
                    <button className="btn btn-info" data-dismiss="modal" >Cancel</button>
                </div>
                </div>
